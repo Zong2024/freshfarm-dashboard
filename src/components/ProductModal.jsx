@@ -37,10 +37,6 @@ const defaultData = {
 
 function ProductModal({ isOpen, setIsOpen, product, getProducts }) {
   const [formData, setFormData] = useState(defaultData)
-  useEffect(() => {
-    console.log(formData)
-    console.log(product)
-  }, [formData, product])
 
   useEffect(() => {
     if (product) {
@@ -105,6 +101,7 @@ function ProductModal({ isOpen, setIsOpen, product, getProducts }) {
         await postAdminProduct(formData)
       }
       setIsOpen(false)
+      setFormData(defaultData)
       getProducts()
     } catch (error) {
       console.error("Failed to save product:", error)
@@ -113,7 +110,7 @@ function ProductModal({ isOpen, setIsOpen, product, getProducts }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="w-full max-w-3xl overflow-y-auto max-h-[90vh]">
+      <DialogContent className='w-full max-w-3xl overflow-y-auto max-h-[90vh]'>
         <DialogHeader>
           <DialogTitle>
             {product ? "Edit Product" : "Create Product"}
